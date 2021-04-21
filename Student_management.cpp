@@ -4,7 +4,6 @@
 #include<string.h>
 #include<malloc.h>
 
-
 //结构体定义
 typedef struct BSTree
 {
