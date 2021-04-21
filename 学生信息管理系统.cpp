@@ -1,62 +1,62 @@
-#define _CRT_SECURE_NO_DEPRECATE //±ØĞë·ÅÔÚµÚÒ»ĞĞ£¬×÷ÓÃÊÇÈÃscanfºÍprintfÖ±½Ó¿ÉÓÃ
+#define _CRT_SECURE_NO_DEPRECATE //VSä¸­ä½¿ç”¨scanfå’Œprintf
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 #include<malloc.h>
 
 
-//½á¹¹Ìå¶¨Òå
+//ç»“æ„ä½“å®šä¹‰
 typedef struct BSTree
 {
-	long long num; //Ñ§ºÅ
+	long long num; //å­¦å·
 	char name[20];
-	char sex[5];//ĞÔ±ğ(¶şÖµ)
-	int age;//ÄêÁä(·Ç¸º)
+	char sex[5];//æ€§åˆ«(äºŒå€¼)
+	int age;//å¹´é¾„(éè´Ÿ)
 	char major[30];
 	struct BSTree *lchild, *rchild;
 }BSTree;
 
-//º¯ÊıÉùÃ÷
-int Get_int(void);//»ñÈ¡ÕûÊı
-long long Get_int1(void);//»ñÈ¡longlongÕûÊı,±£Ö¤Ñ§ºÅ³¤¶È
+//å‡½æ•°å£°æ˜
+int Get_int(void);//è·å–æ•´æ•°
+long long Get_int1(void);//è·å–longlongæ•´æ•°,ä¿è¯å­¦å·é•¿åº¦
 
-BSTree *InsertBSTree(BSTree *T);//²åÈë²Ù×÷Ö÷º¯Êı
-BSTree *FindBSTreeinsert(long long num, BSTree *T, int *flag);//²åÈë²Ù×÷Ò»¼¶×Óº¯Êı
+BSTree *InsertBSTree(BSTree *T);//æ’å…¥æ“ä½œä¸»å‡½æ•°
+BSTree *FindBSTreeinsert(long long num, BSTree *T, int *flag);//æ’å…¥æ“ä½œä¸€çº§å­å‡½æ•°
 
-int EditBSTree(BSTree *T);//±à¼­²Ù×÷Ö÷º¯Êı
+int EditBSTree(BSTree *T);//ç¼–è¾‘æ“ä½œä¸»å‡½æ•°
 
-BSTree *DeleteBSTree(BSTree *T);//É¾³ı²Ù×÷Ö÷º¯Êı
-BSTree *DelBSTree(long long num,BSTree *T,int *flag);//É¾³ı²Ù×÷Ò»¼¶×Óº¯Êı
-BSTree *Del(BSTree *T);//É¾³ı²Ù×÷¶ş¼¶×Óº¯Êı
+BSTree *DeleteBSTree(BSTree *T);//åˆ é™¤æ“ä½œä¸»å‡½æ•°
+BSTree *DelBSTree(long long num,BSTree *T,int *flag);//åˆ é™¤æ“ä½œä¸€çº§å­å‡½æ•°
+BSTree *Del(BSTree *T);//åˆ é™¤æ“ä½œäºŒçº§å­å‡½æ•°
 
-int SearchBSTree(BSTree *T);//²éÕÒ²Ù×÷Ö÷º¯Êı
-BSTree *FindBSTreeequal(long long num, BSTree *T, int *flag);//²éÕÒ²Ù×÷Ò»¼¶×Óº¯Êı
+int SearchBSTree(BSTree *T);//æŸ¥æ‰¾æ“ä½œä¸»å‡½æ•°
+BSTree *FindBSTreeequal(long long num, BSTree *T, int *flag);//æŸ¥æ‰¾æ“ä½œä¸€çº§å­å‡½æ•°
 
-int PrintBSTree(BSTree *T);//Êä³ö²Ù×÷Ö÷º¯Êı
-int Print(BSTree *T);//Êä³ö²Ù×÷Ò»¼¶×Óº¯Êı
+int PrintBSTree(BSTree *T);//è¾“å‡ºæ“ä½œä¸»å‡½æ•°
+int Print(BSTree *T);//è¾“å‡ºæ“ä½œä¸€çº§å­å‡½æ•°
 
 int main( )
 {	int flag = 0, m = 0;
 
-	//½á¹¹Ìå³õÊ¼»¯
+	//ç»“æ„ä½“åˆå§‹åŒ–
 	BSTree *T = 0;
 	while(!(T=(BSTree *)malloc(sizeof(BSTree))))
 	continue;
 	T->num = 0;
-	strcpy_s(T->name, "¿Õ");
-	strcpy_s(T->sex, "¿Õ");
+	strcpy_s(T->name, "ç©º");
+	strcpy_s(T->sex, "ç©º");
 	T->age = 0;
-	strcpy_s(T->major, "¿Õ");
+	strcpy_s(T->major, "ç©º");
 	T->lchild = T->rchild = 0;
 
-	//Ö÷½çÃæ
+	//ä¸»ç•Œé¢
 	printf(" ---------------------------------------------------------\n");
-	printf(" |************** »¶Ó­Ê¹ÓÃÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³ ***************|\n");
-	printf(" |*******Ã¿¸öÑ§ÉúĞÅÏ¢°üÀ¨£ºÑ§ºÅ,ĞÕÃû,ĞÔ±ğ,ÄêÁä,×¨Òµ******|\n");
+	printf(" |************** æ¬¢è¿ä½¿ç”¨å­¦ç”Ÿä¿¡æ¯ç®¡ç†ç³»ç»Ÿ ***************|\n");
+	printf(" |*******æ¯ä¸ªå­¦ç”Ÿä¿¡æ¯åŒ…æ‹¬ï¼šå­¦å·,å§“å,æ€§åˆ«,å¹´é¾„,ä¸“ä¸š******|\n");
 	printf(" ---------------------------------------------------------\n");
 	do
-	{	printf("\n1,²åÈë | 2,±à¼­ | 3,É¾³ı | 4,²éÕÒ(°´Ñ§ºÅ)| 5,ÅÅĞòÊä³ö(°´Ñ§ºÅ) | 0,ÍË³ö\n²Ù×÷=");
-		scanf("%d", &flag); //²âÊÔscanfÊÇ·ñÖ±½Ó¿ÉÓÃ
+	{	printf("\n1,æ’å…¥ | 2,ç¼–è¾‘ | 3,åˆ é™¤ | 4,æŸ¥æ‰¾(æŒ‰å­¦å·)| 5,æ’åºè¾“å‡º(æŒ‰å­¦å·) | 0,é€€å‡º\næ“ä½œ=");
+		scanf("%d", &flag); //æµ‹è¯•scanfæ˜¯å¦ç›´æ¥å¯ç”¨
 		switch(flag)
 		{	 case 1: T = InsertBSTree(T); PrintBSTree(T); break;
 			 case 2: EditBSTree(T); PrintBSTree(T); break;
@@ -64,41 +64,41 @@ int main( )
 			 case 4: SearchBSTree(T); break;
 			 case 5: PrintBSTree(T);break;
 			 case 0: break;
-			 default : printf("\n*********¶Ô²»Æğ£¬Ñ¡ÔñÎŞĞ§£¡*********\n");
+			 default : printf("\n*********å¯¹ä¸èµ·ï¼Œé€‰æ‹©æ— æ•ˆï¼*********\n");
 		}
 	}while(flag);
 
-	printf("\nĞ»Ğ»Ê¹ÓÃ£¬°´ÈÎÒâ¼ü¼ÌĞø\n");
+	printf("\nè°¢è°¢ä½¿ç”¨ï¼ŒæŒ‰ä»»æ„é”®ç»§ç»­\n");
 	getchar();
 }
 
-BSTree *InsertBSTree(BSTree *T)//²åÈë²Ù×÷Ö÷º¯Êı
+BSTree *InsertBSTree(BSTree *T)//æ’å…¥æ“ä½œä¸»å‡½æ•°
 {
 	BSTree *S = 0, *t = 0;
 	int flag = 0;
 	while (!(t = (BSTree *)malloc(sizeof(BSTree))))
 		continue;
-	printf("ÇëÊäÈëÑ§ºÅ\nÑ§ºÅ:");
+	printf("è¯·è¾“å…¥å­¦å·\nå­¦å·:");
 	t->num = Get_int1();
 	if (t->num < 0)
 	{
-		printf("\n²åÈëÊ§°Ü!!!,Ñ§ºÅ²»ÄÜĞ¡ÓÚ0!!!");
+		printf("\næ’å…¥å¤±è´¥!!!,å­¦å·ä¸èƒ½å°äº0!!!");
 		return 0;
 	}
-	printf("ÇëÊäÈëÃû×Ö\nÃû×Ö:");
+	printf("è¯·è¾“å…¥åå­—\nåå­—:");
 	gets_s(t->name);
-	printf("ÇëÑ¡ÔñĞÔ±ğ£º1.ÄĞ  2.Å®\nĞÔ±ğ:");
+	printf("è¯·é€‰æ‹©æ€§åˆ«ï¼š1.ç”·  2.å¥³\næ€§åˆ«:");
 	flag= Get_int();
 	while (flag != 1 && flag != 2)
-	{ printf("Ñ¡ÔñÎŞĞ§£¡ÇëÖØĞÂÊäÈë£º"); flag = Get_int();}
-	if (flag == 1) strcpy_s(t->sex, "ÄĞ");
-	else if (flag == 2) strcpy_s(t->sex, "Å®");
-	printf("ÇëÊäÈëÄêÁä\nÄêÁä:");
+	{ printf("é€‰æ‹©æ— æ•ˆï¼è¯·é‡æ–°è¾“å…¥ï¼š"); flag = Get_int();}
+	if (flag == 1) strcpy_s(t->sex, "ç”·");
+	else if (flag == 2) strcpy_s(t->sex, "å¥³");
+	printf("è¯·è¾“å…¥å¹´é¾„\nå¹´é¾„:");
 	t->age = Get_int();
 	while (t->age < 0)
-	{   printf("ÄêÁä²»ÄÜÎª¸ºÊı£¡ÇëÖØĞÂÊäÈë:");
+	{   printf("å¹´é¾„ä¸èƒ½ä¸ºè´Ÿæ•°ï¼è¯·é‡æ–°è¾“å…¥:");
 		t->age = Get_int();  }
-	printf("ÇëÊäÈë×¨Òµ\n×¨Òµ:");
+	printf("è¯·è¾“å…¥ä¸“ä¸š\nä¸“ä¸š:");
 	gets_s(t->major);
 	t->lchild = t->rchild = 0;
 
@@ -115,13 +115,13 @@ BSTree *InsertBSTree(BSTree *T)//²åÈë²Ù×÷Ö÷º¯Êı
 			S->lchild = t;
 		else if (flag == 3)
 			S->rchild = t;
-		else printf("\n²åÈëÊ§°Ü£¡¿ÉÄÜ²åÈëµÄÑ§ÉúĞÅÏ¢ÒÑ¾­´æÔÚ\n");
+		else printf("\næ’å…¥å¤±è´¥ï¼å¯èƒ½æ’å…¥çš„å­¦ç”Ÿä¿¡æ¯å·²ç»å­˜åœ¨\n");
 	}
 	//PrintBSTree(t);
 	return T;
 	}
 
-BSTree *FindBSTreeinsert(long long number,BSTree *T,int *flag)//²åÈë²Ù×÷Ò»¼¶×Óº¯Êı
+BSTree *FindBSTreeinsert(long long number,BSTree *T,int *flag)//æ’å…¥æ“ä½œä¸€çº§å­å‡½æ•°
 {
 	if(T)
 	{
@@ -140,44 +140,44 @@ BSTree *FindBSTreeinsert(long long number,BSTree *T,int *flag)//²åÈë²Ù×÷Ò»¼¶×Óº¯
 	}
 }
 
-int EditBSTree(BSTree *T)//±à¼­²Ù×÷Ö÷º¯Êı
+int EditBSTree(BSTree *T)//ç¼–è¾‘æ“ä½œä¸»å‡½æ•°
 {
 	BSTree *S = 0, *t = 0;
 	int flag = 0;
 	long long number = 0;
 	if (!T)
 	{
-		printf("\n**********¶Ô²»Æğ£¬Ã»ÓĞÊı¾İÄÜ¹»±à¼­£¬ÇëÊ×ÏÈÊäÈë£¡***********\n");
+		printf("\n**********å¯¹ä¸èµ·ï¼Œæ²¡æœ‰æ•°æ®èƒ½å¤Ÿç¼–è¾‘ï¼Œè¯·é¦–å…ˆè¾“å…¥ï¼***********\n");
 		return 0;
 	}
-	printf("ÇëÊäÈëÒª±à¼­Ñ§ÉúµÄÑ§ºÅ£º\nÑ§ºÅ:");
+	printf("è¯·è¾“å…¥è¦ç¼–è¾‘å­¦ç”Ÿçš„å­¦å·ï¼š\nå­¦å·:");
 	number = Get_int1();
 	S = FindBSTreeequal(number, T, &flag);
 	if (flag == 2)
 	{
-		printf("\n********************** Ñ§ºÅÊÇ%lldµÄÑ§ÉúµÄĞÅÏ¢ÈçÏÂ£º*********************\n", number);
-		printf("\nÑ§ºÅ%lld ĞÕÃû%s ĞÔ±ğ%s ÄêÁä%d ×¨Òµ%s\n", S->num, S->name, S->sex, S->age, S->major);
+		printf("\n********************** å­¦å·æ˜¯%lldçš„å­¦ç”Ÿçš„ä¿¡æ¯å¦‚ä¸‹ï¼š*********************\n", number);
+		printf("\nå­¦å·%lld å§“å%s æ€§åˆ«%s å¹´é¾„%d ä¸“ä¸š%s\n", S->num, S->name, S->sex, S->age, S->major);
 		printf("\n************************************************************************\n");
-		printf("\nÇëÊäÈëÃû×Ö\nÃû×Ö:");
+		printf("\nè¯·è¾“å…¥åå­—\nåå­—:");
 		gets_s(S->name);
-		printf("ÇëÑ¡ÔñĞÔ±ğ£º1.ÄĞ  2.Å®\nĞÔ±ğ:");
+		printf("è¯·é€‰æ‹©æ€§åˆ«ï¼š1.ç”·  2.å¥³\næ€§åˆ«:");
 		flag = Get_int();
 		while (flag != 1 && flag != 2)
 		{
-			printf("Ñ¡ÔñÎŞĞ§£¡ÇëÖØĞÂÊäÈë£º"); flag = Get_int();
+			printf("é€‰æ‹©æ— æ•ˆï¼è¯·é‡æ–°è¾“å…¥ï¼š"); flag = Get_int();
 		}
-		if (flag == 1) strcpy_s(S->sex, "ÄĞ");
-		else if (flag == 2) strcpy_s(S->sex, "Å®");
-		printf("ÇëÊäÈëÄêÁä\nÄêÁä:");
+		if (flag == 1) strcpy_s(S->sex, "ç”·");
+		else if (flag == 2) strcpy_s(S->sex, "å¥³");
+		printf("è¯·è¾“å…¥å¹´é¾„\nå¹´é¾„:");
 		S->age = Get_int();
-		printf("ÇëÊäÈë×¨Òµ\n×¨Òµ:");
+		printf("è¯·è¾“å…¥ä¸“ä¸š\nä¸“ä¸š:");
 		gets_s(S->major);
 		return 1;
 	}
 	else
 	{
-		printf("***********¶Ô²»Æğ£¬Ã»ÓĞÑ§ºÅÊÇ%lldµÄÑ§Éú************", number);
-		printf("\nÄãÏë²åÈëËûµÄĞÅÏ¢Âğ£¿£¨1£¬Ìí¼Ó£¬0²»Ìí¼Ó£©\nÑ¡Ôñ:");
+		printf("***********å¯¹ä¸èµ·ï¼Œæ²¡æœ‰å­¦å·æ˜¯%lldçš„å­¦ç”Ÿ************", number);
+		printf("\nä½ æƒ³æ’å…¥ä»–çš„ä¿¡æ¯å—ï¼Ÿï¼ˆ1ï¼Œæ·»åŠ ï¼Œ0ä¸æ·»åŠ ï¼‰\né€‰æ‹©:");
 		flag = Get_int();
 		if (flag)
 		{
@@ -188,30 +188,30 @@ int EditBSTree(BSTree *T)//±à¼­²Ù×÷Ö÷º¯Êı
 	}
 }
 
-BSTree *DeleteBSTree(BSTree *T) //É¾³ı²Ù×÷Ö÷º¯Êı
+BSTree *DeleteBSTree(BSTree *T) //åˆ é™¤æ“ä½œä¸»å‡½æ•°
 { 
 	int flag=0;
 	long long number;
 	BSTree *S=0;
-	printf("ÇëÊäÈëÒªÉ¾³ıÑ§ÉúµÄÑ§ºÅ£º\nÑ§ºÅ:");
+	printf("è¯·è¾“å…¥è¦åˆ é™¤å­¦ç”Ÿçš„å­¦å·ï¼š\nå­¦å·:");
 	number=Get_int1();
 	S=DelBSTree(number,T,&flag);
 	if(flag==0)
-	printf("\n*******É¾³ıÊ§°Ü£¬Ã»ÓĞÑ§ºÅÊÇ%lldµÄÑ§ÉúµÄĞÅÏ¢********\n",number);
+	printf("\n*******åˆ é™¤å¤±è´¥ï¼Œæ²¡æœ‰å­¦å·æ˜¯%lldçš„å­¦ç”Ÿçš„ä¿¡æ¯********\n",number);
 	return S;
 }
 
-BSTree *DelBSTree(long long number, BSTree *T, int *flag)//É¾³ı²Ù×÷Ò»¼¶×Óº¯Êı
+BSTree *DelBSTree(long long number, BSTree *T, int *flag)//åˆ é™¤æ“ä½œä¸€çº§å­å‡½æ•°
 { 
 	int m;
 	if(!T)
 	*flag=0;
 	else if(number==T->num)
 	{ 
-		printf("********Ñ§ºÅÎª%lldÑ§ÉúµÄĞÅÏ¢ÈçÏÂ£¬È·ÈÏÒªÉ¾³ıÂğ£¿********\n",number);
-		printf("\nÑ§ºÅ=%lld, ĞÕÃû=%s, ĞÔ±ğ=%s,ÄêÁä=%d, ×¨Òµ=%s, \n",T->num,T->name,T->sex,T->age,T->major);
+		printf("********å­¦å·ä¸º%lldå­¦ç”Ÿçš„ä¿¡æ¯å¦‚ä¸‹ï¼Œç¡®è®¤è¦åˆ é™¤å—ï¼Ÿ********\n",number);
+		printf("\nå­¦å·=%lld, å§“å=%s, æ€§åˆ«=%s,å¹´é¾„=%d, ä¸“ä¸š=%s, \n",T->num,T->name,T->sex,T->age,T->major);
 		printf("\n******************************************************\n");
-		printf("\nÈ·ÈÏÒªÉ¾³ıÂğ£¿\n 1£¬É¾³ı || 0£¬È¡ÏûÉ¾³ı\nÑ¡Ôñ:");
+		printf("\nç¡®è®¤è¦åˆ é™¤å—ï¼Ÿ\n 1ï¼Œåˆ é™¤ || 0ï¼Œå–æ¶ˆåˆ é™¤\né€‰æ‹©:");
 		m=Get_int();
 		if(m==0)
 		{ *flag=1;
@@ -226,7 +226,7 @@ BSTree *DelBSTree(long long number, BSTree *T, int *flag)//É¾³ı²Ù×÷Ò»¼¶×Óº¯Êı
 	return T;
 }
 
-BSTree *Del(BSTree *T) //É¾³ı²Ù×÷¶ş¼¶×Óº¯Êı
+BSTree *Del(BSTree *T) //åˆ é™¤æ“ä½œäºŒçº§å­å‡½æ•°
 { 
 	BSTree *S=0,*Q;
 	if(T->lchild)
@@ -245,25 +245,25 @@ BSTree *Del(BSTree *T) //É¾³ı²Ù×÷¶ş¼¶×Óº¯Êı
 	}
 }
 
-int SearchBSTree(BSTree *T)//²éÕÒ²Ù×÷Ö÷º¯Êı
+int SearchBSTree(BSTree *T)//æŸ¥æ‰¾æ“ä½œä¸»å‡½æ•°
 { 
 	long long number;
 	int flag = 0;
 	BSTree *S=0;
-	printf("ÇëÊäÈëÒª²éÕÒÑ§ÉúµÄÑ§ºÅ\nÑ§ºÅ=");
+	printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾å­¦ç”Ÿçš„å­¦å·\nå­¦å·=");
 	number=Get_int1();
 	S=FindBSTreeequal(number,T,&flag);
 	if(flag==2)
-	{ printf("\n***************Ñ§ºÅÊÇ%lldµÄÑ§ÉúµÄĞÅÏ¢ÈçÏÂ£º*****************\n",number);
-	  printf("\nÑ§ºÅ=%lld\tĞÕÃû=%s\tĞÔ±ğ=%s\tÄêÁä=%d\t×¨Òµ=%s\t\n",S->num,S->name,S->sex,S->age ,S->major);
+	{ printf("\n***************å­¦å·æ˜¯%lldçš„å­¦ç”Ÿçš„ä¿¡æ¯å¦‚ä¸‹ï¼š*****************\n",number);
+	  printf("\nå­¦å·=%lld\tå§“å=%s\tæ€§åˆ«=%s\tå¹´é¾„=%d\tä¸“ä¸š=%s\t\n",S->num,S->name,S->sex,S->age ,S->major);
 	  printf("\n**********************************************************\n");
 	  return 1;
 	}
-	printf("\n******²éÕÒÊ§°Ü£¬Ã»ÓĞ Ñ§ºÅ=%d Ñ§ÉúµÄĞÅÏ¢*******\n",number);
+	printf("\n******æŸ¥æ‰¾å¤±è´¥ï¼Œæ²¡æœ‰ å­¦å·=%d å­¦ç”Ÿçš„ä¿¡æ¯*******\n",number);
 	return 0;
 }
 
-BSTree *FindBSTreeequal(long long number, BSTree *T, int *flag)//²éÕÒ²Ù×÷Ò»¼¶×Óº¯Êı
+BSTree *FindBSTreeequal(long long number, BSTree *T, int *flag)//æŸ¥æ‰¾æ“ä½œä¸€çº§å­å‡½æ•°
 {
 	if (T)
 	{
@@ -279,50 +279,50 @@ BSTree *FindBSTreeequal(long long number, BSTree *T, int *flag)//²éÕÒ²Ù×÷Ò»¼¶×Óº
 	}
 }
 
-int PrintBSTree(BSTree *T)//Êä³ö²Ù×÷Ö÷º¯Êı
+int PrintBSTree(BSTree *T)//è¾“å‡ºæ“ä½œä¸»å‡½æ•°
 { 
 	if(!T)
-	{ printf("\n***********************Ã»ÓĞÑ§ÉúĞÅÏ¢*************************\n");
+	{ printf("\n***********************æ²¡æœ‰å­¦ç”Ÿä¿¡æ¯*************************\n");
 	return 0;
 	}
-	printf("\n***************************Ñ§ÉúĞÅÏ¢ÈçÏÂ£º***************************\n");
+	printf("\n***************************å­¦ç”Ÿä¿¡æ¯å¦‚ä¸‹ï¼š***************************\n");
 	Print(T);
 	printf("\n********************************************************************\n");
 	return 1;
 }
 
-int Print(BSTree *T)//Êä³ö²Ù×÷Ò»¼¶×Óº¯Êı
+int Print(BSTree *T)//è¾“å‡ºæ“ä½œä¸€çº§å­å‡½æ•°
 {
 	if(T)
 	{ Print(T->lchild);
-	  printf("\nÑ§ºÅ=%lld\tĞÕÃû=%s\tĞÔ±ğ=%s\tÄêÁä=%d\t×¨Òµ=%s\t",T->num,T->name,T->sex,T->age ,T->major);
+	  printf("\nå­¦å·=%lld\tå§“å=%s\tæ€§åˆ«=%s\tå¹´é¾„=%d\tä¸“ä¸š=%s\t",T->num,T->name,T->sex,T->age ,T->major);
 	  Print(T->rchild);
 	  return 1;
 	}
 	return 0;
 }
 
-int Get_int(void)//»ñÈ¡ÕûÊı
+int Get_int(void)//è·å–æ•´æ•°
 { 
 	int m=0;
-	while(scanf_s("%d",&m)!=1)//ÈôÓÃ»§ÊäÈë·ÇÕûÊıÔòÌáĞÑ
+	while(scanf_s("%d",&m)!=1)//è‹¥ç”¨æˆ·è¾“å…¥éæ•´æ•°åˆ™æé†’
 	{	 while(getchar()!='\n')
 		 continue;
-		 printf("\nÇëÊäÈëÒ»¸öÕûÊı!\nÊäÈë:");
+		 printf("\nè¯·è¾“å…¥ä¸€ä¸ªæ•´æ•°!\nè¾“å…¥:");
 	}
 	while(getchar()!='\n')
 	continue;
 	return m;
 }
 
-long long Get_int1(void)//»ñÈ¡longlongÕûÊı,±£Ö¤Ñ§ºÅ³¤¶È
+long long Get_int1(void)//è·å–longlongæ•´æ•°,ä¿è¯å­¦å·é•¿åº¦
 {
 	long long m = 0;
-	while (scanf_s("%lld", &m) != 1)//ÈôÓÃ»§ÊäÈë·ÇÕûÊıÔòÌáĞÑ
+	while (scanf_s("%lld", &m) != 1)//è‹¥ç”¨æˆ·è¾“å…¥éæ•´æ•°åˆ™æé†’
 	{
 		while (getchar() != '\n')
 			continue;
-		printf("\nÇëÊäÈëÒ»¸öÕûÊı!\nÊäÈë:");
+		printf("\nè¯·è¾“å…¥ä¸€ä¸ªæ•´æ•°!\nè¾“å…¥:");
 	}
 	while (getchar() != '\n')
 		continue;
